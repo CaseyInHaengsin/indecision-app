@@ -1,17 +1,22 @@
 'use strict';
 
+var app = {
+    title: 'Indecision App',
+    subtitle: "This is the app!"
+};
+
 var template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Indecision App'
+        app.title
     ),
     React.createElement(
         'p',
         null,
-        'this is some info!'
+        app.subtitle
     )
 );
 
