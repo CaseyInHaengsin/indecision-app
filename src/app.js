@@ -3,11 +3,11 @@ Command to generate JSX file - babel src/app.js --out-file=public/scripts/app.js
 */
 
 
-var app = {
+const app = {
     title: 'Indecision App',
     subtitle: "This is the app, yo!"
 };
-var user = {
+const user = {
     name: "casey",
     age: "Unknown",
     location: "Wherever"
@@ -22,7 +22,7 @@ function getLocation(location) {
     }
 };
 
-var template = (
+const template = (
     <div>
         <h1>{app.title}</h1>
         <p>{app.subtitle}</p>
@@ -31,5 +31,5 @@ var template = (
     </div>
     );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 ReactDOM.render(template, appRoot);
