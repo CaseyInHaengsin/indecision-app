@@ -42,6 +42,8 @@ var clearEm = function clearEm() {
     render();
 };
 
+var numbers = [55, 101, 1000];
+
 var render = function render() {
     var template = React.createElement(
         "div",
@@ -73,6 +75,18 @@ var render = function render() {
             app.options.length
         ),
         React.createElement(
+            "ol",
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    { key: option },
+                    "Option: ",
+                    option
+                );
+            })
+        ),
+        React.createElement(
             "form",
             { onSubmit: onformSubmit },
             React.createElement("input", { type: "text", name: "option" }),
@@ -87,19 +101,14 @@ var render = function render() {
             { onclick: clearEm },
             "Clear all!"
         ),
-        [React.createElement(
-            "p",
-            { key: "0" },
-            "a"
-        ), React.createElement(
-            "p",
-            { key: "1" },
-            "b"
-        ), React.createElement(
-            "p",
-            { key: "2" },
-            "c"
-        )]
+        numbers.map(function (number) {
+            return React.createElement(
+                "p",
+                { key: number },
+                "Number: ",
+                number
+            );
+        })
     );
 
     ReactDOM.render(template, appRoot);

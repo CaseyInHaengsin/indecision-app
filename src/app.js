@@ -48,6 +48,8 @@ const clearEm = () => {
 
 };
 
+const numbers = [55, 101, 1000];
+
 const render = () => {
     const template = (
         <div>
@@ -56,13 +58,22 @@ const render = () => {
             <p>Location: {getLocation(user.location)}</p>
             <p>{app.options.length > 0 ? 'here are your options' : 'No options'}</p>
             <p>{app.options.length}</p>
+            <ol>
+                {
+                    app.options.map((option) => {
+                        return <li key={option}>Option: {option}</li>
+                    })
+                }
+            </ol>
             <form onSubmit={onformSubmit}>
                 <input type="text" name="option"/>
                 <button>Add Option</button>
             </form>
                 <button onclick={clearEm}>Clear all!</button>
                 {
-                    [<p key="0">a</p>, <p key="1">b</p>, <p key="2">c</p>]
+                    numbers.map((number) => {
+                        return <p key={number}>Number: {number}</p>;
+                    })
                 }
         </div>
         );
