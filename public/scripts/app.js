@@ -83,14 +83,23 @@ var render = function render() {
             )
         ),
         React.createElement(
-            "form",
-            null,
-            React.createElement(
-                "button",
-                { onclick: clearEm },
-                "Clear all!"
-            )
-        )
+            "button",
+            { onclick: clearEm },
+            "Clear all!"
+        ),
+        [React.createElement(
+            "p",
+            { key: "0" },
+            "a"
+        ), React.createElement(
+            "p",
+            { key: "1" },
+            "b"
+        ), React.createElement(
+            "p",
+            { key: "2" },
+            "c"
+        )]
     );
 
     ReactDOM.render(template, appRoot);

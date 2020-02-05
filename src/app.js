@@ -60,10 +60,10 @@ const render = () => {
                 <input type="text" name="option"/>
                 <button>Add Option</button>
             </form>
-            
-            <form>
                 <button onclick={clearEm}>Clear all!</button>
-            </form>
+                {
+                    [<p key="0">a</p>, <p key="1">b</p>, <p key="2">c</p>]
+                }
         </div>
         );
         
