@@ -5,7 +5,8 @@ Command to generate JSX file - babel src/app.js --out-file=public/scripts/app.js
 
 const app = {
     title: 'Indecision App',
-    subtitle: "This is the app, yo!"
+    subtitle: "This is the app, yo!",
+    options: []
 };
 const user = {
     name: "casey",
@@ -22,51 +23,52 @@ function getLocation(location) {
     }
 };
 
-const template = (
-    <div>
-        <h1>{app.title}</h1>
-        <p>{app.subtitle}</p>
-        <p>Location: {getLocation(user.location)}</p>
-        
-    </div>
-    );
-
-let count = 0; 
-const someId = 'myidhere';
-
-const addOne = () => {
-    count++;
-    console.log(count);
+const onformSubmit = (e) => {
+    e.preventDefault();
     
-    renderCounterApp()
-};
-
-const minusOne = () => {
-    count--;
-    renderCounterApp();
-};
-
-const reset = () => {
-    count = 0;
+    const option = e.target.elements.option.value;
+    if (option){
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        render();
     
-    renderCounterApp();
-};
+    }
+    
+
+}
+
 
 
 const appRoot = document.getElementById('app');
 
+const clearEm = () => {
 
-const renderCounterApp = () => {
-    const templateTwo = (
-        <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>Reset</button>
-        </div>
-    );
-    ReactDOM.render(templateTwo, appRoot);
-    
+    app.options = [];
+    render();
+
 };
 
-renderCounterApp();
+const render = () => {
+    const template = (
+        <div>
+            <h1>{app.title}</h1>
+            <p>{app.subtitle}</p>
+            <p>Location: {getLocation(user.location)}</p>
+            <p>{app.options.length > 0 ? 'here are your options' : 'No options'}</p>
+            <p>{app.options.length}</p>
+            <form onSubmit={onformSubmit}>
+                <input type="text" name="option"/>
+                <button>Add Option</button>
+            </form>
+            
+            <form>
+                <button onclick={clearEm}>Clear all!</button>
+            </form>
+        </div>
+        );
+        
+        ReactDOM.render(template, appRoot);
+};
+
+
+render();

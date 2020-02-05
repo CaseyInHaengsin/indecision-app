@@ -6,7 +6,8 @@ Command to generate JSX file - babel src/app.js --out-file=public/scripts/app.js
 
 var app = {
     title: 'Indecision App',
-    subtitle: "This is the app, yo!"
+    subtitle: "This is the app, yo!",
+    options: []
 };
 var user = {
     name: "casey",
@@ -22,77 +23,77 @@ function getLocation(location) {
     }
 };
 
-var template = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        app.title
-    ),
-    React.createElement(
-        "p",
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        "p",
-        null,
-        "Location: ",
-        getLocation(user.location)
-    )
-);
+var onformSubmit = function onformSubmit(e) {
+    e.preventDefault();
 
-var count = 0;
-var someId = 'myidhere';
-
-var addOne = function addOne() {
-    count++;
-    console.log(count);
-
-    renderCounterApp();
-};
-
-var minusOne = function minusOne() {
-    count--;
-    renderCounterApp();
-};
-
-var reset = function reset() {
-    count = 0;
-
-    renderCounterApp();
+    var option = e.target.elements.option.value;
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        render();
+    }
 };
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-    var templateTwo = React.createElement(
+var clearEm = function clearEm() {
+
+    app.options = [];
+    render();
+};
+
+var render = function render() {
+    var template = React.createElement(
         "div",
         null,
         React.createElement(
             "h1",
             null,
-            "Count: ",
-            count
+            app.title
         ),
         React.createElement(
-            "button",
-            { onClick: addOne },
-            "+1"
+            "p",
+            null,
+            app.subtitle
         ),
         React.createElement(
-            "button",
-            { onClick: minusOne },
-            "-1"
+            "p",
+            null,
+            "Location: ",
+            getLocation(user.location)
         ),
         React.createElement(
-            "button",
-            { onClick: reset },
-            "Reset"
+            "p",
+            null,
+            app.options.length > 0 ? 'here are your options' : 'No options'
+        ),
+        React.createElement(
+            "p",
+            null,
+            app.options.length
+        ),
+        React.createElement(
+            "form",
+            { onSubmit: onformSubmit },
+            React.createElement("input", { type: "text", name: "option" }),
+            React.createElement(
+                "button",
+                null,
+                "Add Option"
+            )
+        ),
+        React.createElement(
+            "form",
+            null,
+            React.createElement(
+                "button",
+                { onclick: clearEm },
+                "Clear all!"
+            )
         )
     );
-    ReactDOM.render(templateTwo, appRoot);
+
+    ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+render();
