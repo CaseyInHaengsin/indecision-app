@@ -33,14 +33,40 @@ const template = (
 
 let count = 0; 
 const someId = 'myidhere';
-const templateTwo = (
-    <div>
-        <h1>Count: {count}</h1>
-        <button id={someId} className="button">+1</button>
-    </div>
-);
 
-console.log(templateTwo);
+const addOne = () => {
+    count++;
+    console.log(count);
+    
+    renderCounterApp()
+};
+
+const minusOne = () => {
+    count--;
+    renderCounterApp();
+};
+
+const reset = () => {
+    count = 0;
+    
+    renderCounterApp();
+};
+
 
 const appRoot = document.getElementById('app');
-ReactDOM.render(templateTwo, appRoot);
+
+
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>Reset</button>
+        </div>
+    );
+    ReactDOM.render(templateTwo, appRoot);
+    
+};
+
+renderCounterApp();
