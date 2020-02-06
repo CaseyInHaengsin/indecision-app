@@ -1,4 +1,8 @@
 
+const obj = {
+    name: "Vikram"
+}
+
 class IndecisionApp extends React.Component {
     render(){
         const title = "Indecision";
@@ -77,9 +81,11 @@ class Option extends React.Component {
 
 class AddOption extends React.Component {
     handleAddOption(e){
+        e.preventDefault();
         if (e.target.elements.option.value){
-            let opt = e.target.elements.option.value;
-            app.options.append(opt);
+            
+            let opt = e.target.elements.option.value.trim();
+            
         }
     }
 
