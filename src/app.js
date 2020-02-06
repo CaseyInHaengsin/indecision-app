@@ -41,11 +41,14 @@ class Action extends React.Component {
 //Options -> Options component here
 class Options extends React.Component {
     render(){
+        console.log(this.props)
         
         return (
             <div>
-                {this.props.options.length}
-                <Option />
+                {
+                    this.props.options.map((option) => <Option key={option} optionText={option}/>)
+                }
+                
             </div>
         );
     }
@@ -58,7 +61,7 @@ class Option extends React.Component {
     render(){
         return (
             <div>
-                An Option!
+                {this.props.optionText}
             </div>
         )
     }
