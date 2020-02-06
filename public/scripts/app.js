@@ -49,7 +49,7 @@ var Header = function (_React$Component2) {
     _createClass(Header, [{
         key: "render",
         value: function render() {
-            console.log(this.props);
+
             return React.createElement(
                 "div",
                 null,
@@ -80,6 +80,11 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
+        key: "handlePick",
+        value: function handlePick() {
+            alert('Handle pick!');
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
@@ -87,7 +92,7 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     "button",
-                    null,
+                    { onClick: this.handlePick },
                     "What should I do? "
                 )
             );
@@ -110,16 +115,25 @@ var Options = function (_React$Component4) {
     }
 
     _createClass(Options, [{
+        key: "handleRemove",
+        value: function handleRemove() {
+            this.props.options = [];
+        }
+    }, {
         key: "render",
         value: function render() {
-            console.log(this.props);
 
             return React.createElement(
                 "div",
                 null,
                 this.props.options.map(function (option) {
                     return React.createElement(Option, { key: option, optionText: option });
-                })
+                }),
+                React.createElement(
+                    "button",
+                    { onClick: this.handleRemove },
+                    "Remove All"
+                )
             );
         }
     }]);
@@ -162,6 +176,14 @@ var AddOption = function (_React$Component6) {
     }
 
     _createClass(AddOption, [{
+        key: "handleAddOption",
+        value: function handleAddOption(e) {
+            if (e.target.elements.option.value) {
+                var opt = e.target.elements.option.value;
+                app.options.append(opt);
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
@@ -171,6 +193,16 @@ var AddOption = function (_React$Component6) {
                     "p",
                     null,
                     "Add an Option!"
+                ),
+                React.createElement(
+                    "form",
+                    { onSubmit: this.handleAddOption },
+                    React.createElement("input", { type: "text", name: "option" }),
+                    React.createElement(
+                        "button",
+                        null,
+                        "Submit"
+                    )
                 )
             );
         }
