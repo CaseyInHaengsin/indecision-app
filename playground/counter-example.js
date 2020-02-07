@@ -29,6 +29,7 @@ class Counter extends React.Component{
     }
     
     handleMinusOne(){
+        //Note - use prevState. It's proper
         this.setState((prevState) => {
             
             

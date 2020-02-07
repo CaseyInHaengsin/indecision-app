@@ -46,6 +46,7 @@ var Counter = function (_React$Component) {
     }, {
         key: 'handleMinusOne',
         value: function handleMinusOne() {
+            //Note - use prevState. It's proper
             this.setState(function (prevState) {
 
                 return {
