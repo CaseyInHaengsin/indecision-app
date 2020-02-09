@@ -49,7 +49,7 @@ class IndecisionApp extends React.Component {
         
         return (
             <div className="ui aligned">
-                <Header className="ui header" title={title} subtitle={subtitle} />
+                <Header className="ui header" subtitle={subtitle} />
                 <Action 
                     hasOptions={this.state.options.length > 0} 
                     handlePick={this.handlePick}    
@@ -73,6 +73,10 @@ const Header = (props) => {
             <h2>{props.subtitle}</h2>
         </div>
     )
+}
+
+Header.defaultProps = {
+    title: "Indecision App"
 }
 
 const Action = (props) => {
