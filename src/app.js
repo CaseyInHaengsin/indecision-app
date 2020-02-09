@@ -9,7 +9,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
-
+        this.handleDeleteOption = this.handleDeleteOption.bind(this);
         this.state = {
             options: props.options
         }
@@ -34,8 +34,11 @@ class IndecisionApp extends React.Component {
         this.setState((prevState) => ({ options: prevState.options.concat([option]) }));
         
     }
-    handleRemoveOne(option){
-
+    handleDeleteOption(optionToRemove){
+        this.setState((prevState) => ({ 
+            options: prevState.options.filter((option) => {
+                return optionToRemove !== option;
+            }) }))
     }
 
     render(){
@@ -50,6 +53,7 @@ class IndecisionApp extends React.Component {
                     handlePick={this.handlePick}    
                 />
                 <Options 
+                    handleDeleteOption={this.handleDeleteOption}
                     options={this.state.options}
                     handleDeleteOptions = {this.handleDeleteOptions}
                     />
@@ -96,7 +100,12 @@ const Options = (props) => {
     return (
         <div>
             {
-            props.options.map((option) => <Option key={option} optionText={option}/>)
+            props.options.map((option) => (
+                <Option  
+                    key={option} 
+                    optionText={option}
+                    handleDeleteOption={props.handleDeleteOption}
+                    />))
             }
             <br></br>
             <button className="ui button" onClick={props.handleDeleteOptions}>Remove All</button>
@@ -110,8 +119,19 @@ const Options = (props) => {
 const Option = (props) => {
     return (
         
-        <div className="ui list">
-            <div className="item">{props.optionText}</div>
+        <div className="ui grid">
+            <div className="three column row">
+            
+            <div className="column" >{props.optionText}</div>
+                <button className="ui button" 
+                    onClick={(e) => {
+                        props.handleDeleteOption(props.optionText);
+                    }}
+                    
+                    >
+                Remove</button>
+                
+            </div>
         </div>
         
     )
