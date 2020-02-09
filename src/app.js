@@ -48,8 +48,8 @@ class IndecisionApp extends React.Component {
         const subtitle = "What will you do? Dude";
         
         return (
-            <div>
-                <Header title={title} subtitle={subtitle} />
+            <div className="ui aligned">
+                <Header className="ui header" title={title} subtitle={subtitle} />
                 <Action 
                     hasOptions={this.state.options.length > 0} 
                     handlePick={this.handlePick}    
@@ -78,7 +78,7 @@ const Header = (props) => {
 const Action = (props) => {
     return (
         <div>
-            <button 
+            <button className="ui button"
                 onClick={props.handlePick}
                 disabled={!props.hasOptions}
                 >
@@ -94,7 +94,8 @@ const Options = (props) => {
             {
             props.options.map((option) => <Option key={option} optionText={option}/>)
             }
-            <button onClick={props.handleDeleteOptions}>Remove All</button>
+            <br></br>
+            <button className="ui button" onClick={props.handleDeleteOptions}>Remove All</button>
         </div>
     );
 }
@@ -105,22 +106,14 @@ const Options = (props) => {
 const Option = (props) => {
     return (
         
-        <div>
-            {props.optionText}
+        <div className="ui list">
+            <div className="item">{props.optionText}</div>
         </div>
         
     )
 }
 
-// class Option extends React.Component {
-//     render(){
-//         return (
-//             <div>
-//                 {this.props.optionText}
-//             </div>
-//         )
-//     }
-// }
+
 
 class AddOption extends React.Component {
     constructor(props){
@@ -153,18 +146,16 @@ class AddOption extends React.Component {
             <div>
                 {this.state.error && <p>{this.state.error}</p>}
                 
-                <p>Add an Option!</p>
-                <form onSubmit={this.handleAddOption}>
+                <h5>Add an Option!</h5>
+                <br></br>
+                <form className="ui form" onSubmit={this.handleAddOption}>
                     <input type="text" name="option"/>
-                    <button>Submit</button>
+                    <button className="ui button">Submit</button>
                 </form>
             </div>
         );
     }
 }
-
-
-
 
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
