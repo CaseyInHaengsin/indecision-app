@@ -14,13 +14,9 @@ class IndecisionApp extends React.Component {
             options: props.options
         }
     }
-    handleDeleteOptions(){
-        this.setState(() => {
-            return {
-                options: []
-            }
-        })
-    }
+    
+
+    handleDeleteOptions(){ this.setState(() => ({ options: [] })); }
     handlePick(){
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
@@ -35,12 +31,11 @@ class IndecisionApp extends React.Component {
             return "This option already exists";
 
         }
+        this.setState((prevState) => ({ options: prevState.options.concat([option]) }));
         
-        this.setState((prevState) => {
-            return {
-                options: prevState.options.concat([option])
-            }
-        })
+    }
+    handleRemoveOne(option){
+
     }
 
     render(){
@@ -143,9 +138,8 @@ class AddOption extends React.Component {
             const error = this.props.handleAddOption(opt);
             e.target.elements.option.value = "";
 
-            this.setState(() => {
-                return { error }
-            });
+            this.setState(() => ({ error }))
+            
             
         }
     }
