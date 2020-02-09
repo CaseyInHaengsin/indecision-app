@@ -32,11 +32,15 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var json = localStorage.getItem('options');
-            var options = JSON.parse(json);
-            this.setState(function () {
-                return { options: options };
-            });
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {}
         }
     }, {
         key: 'componentDidUpdate',
@@ -161,6 +165,11 @@ var Options = function Options(props) {
     return React.createElement(
         'div',
         null,
+        props.options.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an option to get started'
+        ),
         props.options.map(function (option) {
             return React.createElement(Option, {
                 key: option,
@@ -231,11 +240,14 @@ var AddOption = function (_React$Component2) {
                 var opt = e.target.elements.option.value.trim();
                 //this code is passing the option to the root component
                 var error = this.props.handleAddOption(opt);
-                e.target.elements.option.value = "";
 
                 this.setState(function () {
                     return { error: error };
                 });
+
+                if (!error) {
+                    e.target.elements.option.value = "";
+                }
             }
         }
     }, {
